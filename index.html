@@ -243,6 +243,19 @@
   figure svg { max-width: 100%; height: auto; display: block; }
   figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; max-width: 46em; }
   .figcard { background: var(--card); border: 1px solid var(--hair); border-radius: 16px; box-shadow: var(--shadow); padding: 20px; overflow-x: auto; }
+  .plusmin { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 22px 0; }
+  .plusmin .col { background: var(--card); border: 1px solid var(--hair); border-radius: 16px; box-shadow: var(--shadow); padding: 20px 22px; }
+  .plusmin .col.plus { border-top: 3px solid var(--green); }
+  .plusmin .col.minus { border-top: 3px solid var(--rust); }
+  .plusmin h3 { margin: 0 0 12px; font-size: 16px; }
+  .plusmin .col.plus h3 { color: var(--green); }
+  .plusmin .col.minus h3 { color: var(--rust); }
+  .plusmin ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+  .plusmin li { font-size: 14.5px; padding-left: 16px; position: relative; }
+  .plusmin li::before { content: ""; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; }
+  .plusmin .plus li::before { background: var(--green); }
+  .plusmin .minus li::before { background: var(--rust); }
+  .plusmin li b { color: var(--ink-strong); }
   figure.shot { margin: 22px 0; }
   figure.shot img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid var(--hair); box-shadow: var(--shadow); }
   figure.shot figcaption .src { color: var(--gold-text); font-weight: 700; }
@@ -309,6 +322,7 @@
 
 <nav class="toc" aria-label="Turinys">
   <div class="row">
+    <a href="#kodel">00 Kodėl</a>
     <a href="#kas">01 Kas tai</a>
     <a href="#zodynas">02 Žodynėlis</a>
     <a href="#skydelis">03 Skydelis</a>
@@ -338,6 +352,40 @@
     </div>
   </div>
 </header>
+
+<section id="kodel">
+  <div class="wrap">
+    <div class="chapter"><span class="no">00</span><h2>Kodėl iš viso svarstyti margin?</h2></div>
+    <p>Cash accounte gyventi galima visą gyvenimą - ir daugumai taip ir reikėtų. Perėjimas prie margin nėra "kitas lygis", kurį privalai pasiekti. Tai įrankis su sava kaina, ir sprendimas turi ateiti iš supratimo, ne iš FOMO. Štai kaip tas svarstymas atrodo iš vidaus, po metų realios praktikos:</p>
+    <div class="plusmin">
+      <div class="col plus">
+        <h3>Ką margin realiai duoda</h3>
+        <ul>
+          <li><b>Kapitalo efektyvumas.</b> Tas pats PUT pardavimas naudoja ~5x mažiau kapitalo, premija atkeliauja iškart. Likęs cash gali dirbti kitur arba laukti progos.</li>
+          <li><b>Lankstumas valdyti pozicijas.</b> Roll'ai, delta balansavimas, pozicijų pertvarkymas - cash accounte šitų svertų arba nėra, arba jie brangūs. "Margin acc gali suteikti daugiau saugumo negu cash acc - bet čia didelis BET yra žinių kiekis."</li>
+          <li><b>Krizės rezervas.</b> Kai cash baigiasi, o rinka pagaliau duoda deep pakritimą - margin leidžia veikti tada, kai galimybės didžiausios. Tai vienas iš scenarijų, dėl kurių šitą įrankį verta turėti arsenale.</li>
+          <li><b>Spot pozicijos pradeda dirbti.</b> Ramiai gulinčios akcijos tampa collateral, ant kurio galima pardavinėti saugius PUT - papildomi keli % per metus iš turto, kuris kitaip tiesiog gulėtų.</li>
+          <li><b>Visos kopėčios atsirakina.</b> CSP → margin PUT → spot → LEAPS: tą patį cash gali mėtyti tarp įrankių pagal tai, kiek akcija tuo metu nuvertinta ar pervertinta.</li>
+        </ul>
+      </div>
+      <div class="col minus">
+        <h3>Ko tai kainuoja</h3>
+        <ul>
+          <li><b>Klaidos kaina - visas kapitalas.</b> Cash accounte blogiausias scenarijus - pralaikysi blogą poziciją. Margin accounte klaida gali sudeginti sąskaitą iki nulio. Virvė ilga.</li>
+          <li><b>Žinių slenkstis realus.</b> Visos naudos veikia tik SU žiniomis - be jų margin yra tiesiog greitesnis būdas nudegti. Metai cash opcionų patirties yra minimumas, ne formalumas.</li>
+          <li><b>Nauji rizikos vektoriai.</b> IV expansion ir kintantis capital requirement gali priversti veikti net kainai nepasiekus tavo strike. Ir likvidavimas ateina be skambučio.</li>
+          <li><b>Psichologija dirba prieš tave.</b> BP šokteli 5-10x ir "natūralus noras išnaudoti visą BP" yra kritinė klaida numeris vienas. Svertas veikia į abi puses - raudoni periodai būna gilesni ir skausmingesni.</li>
+          <li><b>Kelio atgal nėra.</b> IBKR margin account į cash nebegrąžinamas. Sprendimas vienos krypties - dar viena priežastis neskubėti.</li>
+        </ul>
+      </div>
+    </div>
+    <blockquote class="rq">
+      <p>"Alokacija tarp skirtingų įrankių - CSP → margin account PUT'ai → spot akcijos → LEAPS - padeda mėtyti tą patį cash tarp skirtingų instrumentų, priklausomai nuo to, kiek akcija tuo metu yra nuvertinta ar pervertinta."</p>
+      <cite>🌍apie-viską · 2026-07-30</cite>
+    </blockquote>
+    <p>Trumpai: margin vertas svarstymo tada, kai cash accounte opcionai jau nuobodžiai aiškūs, kapitalo efektyvumas tapo realiu limitu, o rizikos valdymas - įpročiu, ne teorija. Jei bent vienas iš trijų dar ne - lieki cash ir nieko nepraranti. Visa kita šiame puslapyje yra apie tai, kaip su tuo įrankiu nesusižaloti.</p>
+  </div>
+</section>
 
 <section id="kas">
   <div class="wrap">
@@ -380,17 +428,6 @@
       Tie 13 400$ galioja tik ramioje rinkoje. Akcijai krentant ir IV kylant reikalavimas auga - per korekciją jis gali padvigubėti ar patrigubėti kaip tik tada, kai tavo equity mažėja. Todėl skirtumas tarp 55 000$ ir 7 450$ yra ne "nemokami pinigai", o virvė iš citatos viršuje.
     </div>
 
-    <h3>Kam margin realiai naudingas</h3>
-    <div class="cards">
-      <div class="cardi"><h4>Kapitalo efektyvumui</h4><p>Tas pats PUT pardavimas naudoja ~5x mažiau kapitalo. Likęs cash gali dirbti kitur arba laukti progos.</p></div>
-      <div class="cardi"><h4>Spot pozicijos kaip collateral</h4><p>Ramiai gulinčios akcijos (pvz. SOFI) tampa užstatu, ant kurio galima pardavinėti saugius PUT - papildomi ~5% per metus ant viršaus.</p></div>
-      <div class="cardi"><h4>Dry powder krizei</h4><p>Kai cash baigiasi, o rinka duoda deep krizę - margin leidžia veikti tada, kai galimybės didžiausios. Bet tik jei prieš tai nesikabinai ant virvės.</p></div>
-      <div class="cardi"><h4>Cash įdarbinimui</h4><p>Mažo svyravimo aktyvai (eksperimente - STRC už 5 000$ BP) leidžia išspausti daugiau iš kapitalo, kuris kitaip tiesiog gulėtų.</p></div>
-    </div>
-    <blockquote class="rq">
-      <p>"Alokacija tarp skirtingų įrankių - CSP → margin account PUT'ai → spot akcijos → LEAPS - padeda mėtyti tą patį cash tarp skirtingų instrumentų, priklausomai nuo to, kiek akcija tuo metu yra nuvertinta ar pervertinta."</p>
-      <cite>🌍apie-viską · 2026-07-30</cite>
-    </blockquote>
     <div class="note">
       <div class="t">Techninis niuansas</div>
       Margin accounte "cash secured put" kaip tipas nebeegzistuoja - brokerio rizikos sistema kiekvieną parduotą PUT mato kaip naked ir marginuoja pagal tą pačią formulę. CSP tampa tiesiog tavo paties disciplinos taisykle, ne brokerio.
