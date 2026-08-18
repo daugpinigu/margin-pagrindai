@@ -356,12 +356,14 @@
 <section id="kodel">
   <div class="wrap">
     <div class="chapter"><span class="no">00</span><h2>Kodėl iš viso svarstyti margin?</h2></div>
-    <p>Cash accounte gyventi galima visą gyvenimą - ir daugumai taip ir reikėtų. Perėjimas prie margin nėra "kitas lygis", kurį privalai pasiekti. Tai įrankis su sava kaina, ir sprendimas turi ateiti iš supratimo, ne iš FOMO. Štai kaip tas svarstymas atrodo iš vidaus, po metų realios praktikos:</p>
+    <p>Margin yra kitas laiptelis opcionų kelionėje - tiesiog jis nėra būtinas. Cash accounte gyventi galima visą gyvenimą, bet margin atriša rankas: atrakina strategijas ir aktyvus, kurie cash accounte tiesiog neprieinami. Už tai pasiima savo kainą, todėl sprendimas turi ateiti iš supratimo, ne iš FOMO. Štai kaip tas svarstymas atrodo iš vidaus, po metų realios praktikos:</p>
     <div class="plusmin">
       <div class="col plus">
         <h3>Ką margin realiai duoda</h3>
         <ul>
           <li><b>Kapitalo efektyvumas.</b> Tas pats PUT pardavimas naudoja ~5x mažiau kapitalo, premija atkeliauja iškart. Likęs cash gali dirbti kitur arba laukti progos.</li>
+          <li><b>Atsirakina brangios akcijos.</b> Su 30-40k cash portfeliu TSLA wheel'inti neišeina - vienas PUT užrakina 30k+ ir jokios diversifikacijos nelieka, tenka lįsti į pakaitalus kaip TSLL. Margin accounte tikras underlying tampa pasiekiamas nepaaukojant diversifikacijos.</li>
+          <li><b>Saugesni strike be grąžos aukojimo.</b> Cash accounte grąža skaičiuojasi nuo pilno užrakinto strike, todėl spaudžia rinktis agresyvesnius strike, kad atsipirktų. Margin naudoja mažiau kapitalo - gali rinktis toli OTM, būti rečiau executintas, o grąža nuo realiai dirbančio kapitalo vis tiek gera.</li>
           <li><b>Lankstumas valdyti pozicijas.</b> Roll'ai, delta balansavimas, pozicijų pertvarkymas - cash accounte šitų svertų arba nėra, arba jie brangūs. "Margin acc gali suteikti daugiau saugumo negu cash acc - bet čia didelis BET yra žinių kiekis."</li>
           <li><b>Krizės rezervas.</b> Kai cash baigiasi, o rinka pagaliau duoda deep pakritimą - margin leidžia veikti tada, kai galimybės didžiausios. Tai vienas iš scenarijų, dėl kurių šitą įrankį verta turėti arsenale.</li>
           <li><b>Spot pozicijos pradeda dirbti.</b> Ramiai gulinčios akcijos tampa collateral, ant kurio galima pardavinėti saugius PUT - papildomi keli % per metus iš turto, kuris kitaip tiesiog gulėtų.</li>
