@@ -752,10 +752,10 @@
     <p>Margin acc eksperimentas startavo 2026-01-05 su 30k (Tastytrade, įnašai augo iki ~70k). Planas buvo gražus - realybė davė "šlapiu skuduru per veidą" beveik iš karto:</p>
     <figure>
       <div class="figcard" style="position:relative" id="chartCard">
-        <svg id="pnlChart" viewBox="0 0 920 320" role="img" aria-label="Eksperimento 2026 metų P&L kreivė: nuo nulio sausį iki -18k gegužę ir atsigavimas iki +10k rugpjūtį" style="min-width:640px"></svg>
+        <svg id="pnlChart" viewBox="0 0 920 320" role="img" aria-label="Eksperimento 2026 metų P&L kreivė: nuo nulio sausį iki -18k gegužę (momentinis dugnas -26k) ir atsigavimas iki +10k rugpjūtį" style="min-width:640px"></svg>
         <div class="tipbox" id="chartTip"></div>
       </div>
-      <figcaption>2026 m. P&amp;L (be įnašų efekto), tūkst. $. Pirmi 7 mėnesiai - minusas: PYPL katastrofa sausį-vasarį, balandžio korekcija (BP 99.1%), BE ir MU pamokos. Į pliusą - tik rugpjūčio 4 d. Užvedus pelę ant taško - reikšmė.</figcaption>
+      <figcaption>2026 m. P&amp;L (be įnašų efekto), tūkst. $. Pirmi 7 mėnesiai - minusas: PYPL katastrofa sausį-vasarį, balandžio korekcija (BP 99.1%), BE ir MU pamokos. Grafike - periodų uždarymai; pačiame dugne minusas vienu momentu siekė -26k$. Į pliusą - tik rugpjūčio 4 d. Užvedus pelę ant taško - reikšmė.</figcaption>
     </figure>
     <blockquote class="rq">
       <p>"Nuo pirmos šio eksperimento dienos gavau tiesiog šlapiu skuduru per veidą. Su svyravimais, bet pagaliau accountas yra pelningas. Įgijau labai daug patirties, nes visa teorija yra nieko verta be praktikos. Tikiu, kad toliau bus tik geriau, nors tai tikrai nevyks tiesia linija."</p>
@@ -912,7 +912,11 @@
   svg.appendChild(endT);
   var lowD = data[4];
   var lowT = el('text', { x: x(lowD[1]), y: y(lowD[2]) + 20, 'text-anchor': 'middle', 'font-size': 12.5, 'font-weight': 700, fill: 'var(--rust)' });
-  lowT.textContent = '-18k$';
+  var lowT1 = el('tspan', {});
+  lowT1.textContent = '-18k$';
+  var lowT2 = el('tspan', { 'font-weight': 400, 'font-size': 12, fill: 'var(--muted)' });
+  lowT2.textContent = ' · momentinis dugnas -26k$';
+  lowT.appendChild(lowT1); lowT.appendChild(lowT2);
   svg.appendChild(lowT);
   // hover layer
   var tip = document.getElementById('chartTip');
